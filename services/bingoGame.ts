@@ -34,6 +34,12 @@ export class bingoGame implements IbingoGame {
   getNextNumber(): bingoNumber {
     //select a bingo number and mark it as used
     var numbersLeftToPlay = this.bingoNumbers.filter(x => x.hasNumberBeenCalled == false);
+    if (numbersLeftToPlay.length === 0){ 
+      return new bingoNumber({
+        numberToBeCalled: 0, amusingSlang: 'No balls left to play', explaination: 'You have used all the available bingo balls for this game.  Press start new game'
+        , hasNumberBeenCalled: false
+      });
+    }
     var randomSelection = Math.floor(Math.random() * numbersLeftToPlay.length);
     var selectedNumber = numbersLeftToPlay[randomSelection];
     selectedNumber.hasNumberBeenCalled = true;
